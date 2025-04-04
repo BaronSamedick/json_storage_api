@@ -1,9 +1,16 @@
+import redis
 import uvicorn
 from fastapi import FastAPI
 
 from config import settings
 
 app = FastAPI()
+redis_client = redis.Redis(
+    username=settings.redis.user,
+    password=settings.redis.password,
+    host=settings.redis.host,
+    port=settings.redis.port
+)
 
 
 @app.get("/")
