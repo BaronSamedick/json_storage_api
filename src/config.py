@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, RedisDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -6,6 +6,14 @@ class ServerConfig(BaseModel):
     host: str
     port: int
     debug: bool
+
+
+class RedisConfig(BaseModel):
+    user: str
+    password: str
+    host: str
+    port: int
+    url: RedisDsn
 
 
 class Settings(BaseSettings):
@@ -17,6 +25,7 @@ class Settings(BaseSettings):
     )
 
     server: ServerConfig
+    redis: RedisConfig
 
 
 settings = Settings()
