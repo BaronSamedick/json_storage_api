@@ -1,13 +1,14 @@
 from fastapi import APIRouter, Header
-from pydantic import Json
+from service import store_json_to_redis
 
 router = APIRouter()
 
 
 @router.put("/objects/{key}")
-def add_object_by_key(key: int, json_object: Json, expires: int | None = Header(default=None)):
+def add_object_by_key(key: str, json_object: dict, expires: int | None = Header(default=None)):
     """Запись объектов в хранилище"""
-    pass
+    result = store_json_to_redis(key, json_object, expires)
+    return {"success": result}
 
 
 @router.get("/objects/{key}")
