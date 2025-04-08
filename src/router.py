@@ -27,9 +27,3 @@ def get_liveness_probes() -> None:
 def get_readiness_probes() -> None:
     """Проверка готовности"""
     pass
-
-
-@router.get("/metrics")
-def get_prometheus_metrics() -> None:
-    """Получение метрик"""
-    pass
