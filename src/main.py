@@ -3,20 +3,17 @@ import uvicorn
 from fastapi import FastAPI
 
 from config import settings
+from router import router as api_router
 
 app = FastAPI()
+app.include_router(api_router)
+
 redis_client = redis.Redis(
     username=settings.redis.user,
     password=settings.redis.password,
     host=settings.redis.host,
     port=settings.redis.port
 )
-
-
-@app.get("/")
-def index():
-    return {"message": "Hello, World!!!"}
-
 
 if __name__ == '__main__':
     uvicorn.run(
